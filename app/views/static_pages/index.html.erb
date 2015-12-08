@@ -1,0 +1,18 @@
+  <div class="jumbotron">
+    <div class="container">
+      <% if user_signed_in? %>
+      <h1>Welcome, <%= current_user.name %>!</h1>
+      <p>Good to have you back.</p>
+      <p>
+        <%= link_to 'Logout', destroy_user_session_path, method: 'delete', class: 'btn btn-primary btn-lg' %>
+      </p>
+      <% else %>
+      <h1>Welcome!</h1>
+      <p>Register to get started or Log into your Account.</p>
+      <p>
+        <%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+        <%= link_to 'Log in', new_user_session_path, class: 'btn btn-primary btn-lg' %>
+      </p>
+      <% end %>
+    </div>
+  </div>

@@ -32,6 +32,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Authentication
+gem 'devise'
+
+# Bootstrap
+gem 'bootstrap-sass'
+
 # Securely configure application
 gem "figaro"
 
