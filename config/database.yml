@@ -22,7 +22,7 @@ default: &default
   pool: 5
   host: localhost
   username: radi
-  password: ENV["pq_password"]
+  password: <%= ENV['pq_password'] %>
 
 development:
   <<: *default
