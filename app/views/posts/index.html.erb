@@ -1,0 +1,22 @@
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Welcome, <%= current_user.name %>!</h1>
+      <p>Good to have you back.</p>
+    </div>
+  </div>
+
+<h2>Feed</h2>
+<div>
+  <% @posts.each do |p| %>
+  <p><strong><%= p.author.name %></strong></p>
+  <p><%= p.content %></p>
+  <p><%= p.likes %></p>
+  <strong>Comments:</strong>
+  <div>
+    <% p.comments.each do |c| %>
+    <p><%= c.content %></p>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
