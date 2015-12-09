@@ -9,3 +9,17 @@
 .alert-notice {
   @extend .alert-info;
 }
+
+.navbar-default {
+  background-image: none;
+  background-color: #3b5998;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #fff;
+}
+
