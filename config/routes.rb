@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     member do
       get 'profile'
       get 'friends'
+      get 'notifications'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @posts = Post.all
+    @users = User.all
   end
 
   def show
@@ -13,5 +13,9 @@ class UsersController < ApplicationController
 
   def friends
     # @friends = current_user.friends
+  end
+
+  def notifications
+
   end
 end
