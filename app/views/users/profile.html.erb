@@ -1,0 +1,47 @@
+<div class="jumbotron">
+  <div class="container">
+  <h1><%= current_user.name %>'s Profile</h1>
+  </div>
+</div>
+
+<div class="tabbable tabs-left">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Overview</a></li>
+    <li><a href="#tab2" data-toggle="tab">Work</a></li>
+    <li><a href="#tab3" data-toggle="tab">Education</a></li>
+    <li><a href="#tab4" data-toggle="tab">Address</a></li>
+    <li><a href="#tab5" data-toggle="tab">Phone</a></li>
+    <li><a href="#tab6" data-toggle="tab">Birthday</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+      <p>Name: <%= current_user.name %></p>
+      <p>Email: <%= current_user.email %></p>
+    </div>
+    <div class="tab-pane" id="tab2">
+      <h3>Work place</h3>
+      <hr>
+      <p>Expanded info fo the user.</p>
+    </div>
+    <div class="tab-pane" id="tab3">
+      <h3>University or High School Attended</h3>
+      <hr>
+      <p>Expanded info fo the user.</p>
+    </div>
+    <div class="tab-pane" id="tab4">
+      <h3>Residence Information</h3>
+      <hr>
+      <p>Expanded info fo the user.</p>
+    </div>
+    <div class="tab-pane" id="tab5">
+      <h3>Phone coordinates</h3>
+      <hr>
+      <p>Expanded info fo the user.</p>
+    </div>
+    <div class="tab-pane" id="tab6">
+      <h3>Date of birth</h3>
+      <hr>
+      <p>Expanded info fo the user.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="jumbotron">
+  <div class="container">
+  <h1><%= current_user.name %></h1>
+  </div>
+  <ul class="nav nav-tabs">
+    <li><%= link_to 'About', profile_user_path %></li>
+    <li><%= link_to 'Friends', friends_user_path %></li>
+  </ul>
+</div>
+
+

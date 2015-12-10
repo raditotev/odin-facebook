@@ -35,7 +35,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Authentication
 gem 'devise'
 
-# Bootstrap
+# Styling
 gem 'bootstrap-sass'
 
 # Securely configure application

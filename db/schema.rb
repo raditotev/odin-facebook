@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209121254) do
+ActiveRecord::Schema.define(version: 20151210123233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(version: 20151209121254) do
   end
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+
+  create_table "infos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.date     "birthday"
+    t.string   "work"
+    t.string   "education"
+    t.string   "address"
+    t.string   "phone"
+    t.text     "about"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "infos", ["user_id"], name: "index_infos_on_user_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.integer  "author_id"
@@ -55,4 +69,5 @@ ActiveRecord::Schema.define(version: 20151209121254) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "comments", "posts"
+  add_foreign_key "infos", "users"
 end
