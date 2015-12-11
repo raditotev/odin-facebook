@@ -7,4 +7,7 @@ class User < ActiveRecord::Base
   has_many :posts, foreign_key: "author_id", dependent: :destroy
   has_one :info, dependent: :destroy
   has_many :invitations, foreign_key: "to_user_id", dependent: :destroy
+
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships, foreign_key: "user_id"
 end
