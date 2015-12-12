@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources :posts, only: [:create]
+
   resources :users do
     member do
       get 'profile'

@@ -8,4 +8,20 @@ class PostsController < ApplicationController
     end
     @posts.sort_by! {|post| -post.created_at.strftime("%s").to_i }
   end
+
+  def create
+    post = current_user.posts.build(post_params)
+    if post.save
+      flash[:success] = "Post created!"
+      redirect_to current_user
+    else
+      flash[:error] = "There was a problem...Post hasn't been created!"
+    end
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:content)
+  end
 end

@@ -7,12 +7,12 @@
 
 <h2 class="text-center">Feed</h2>
 
+<%= render 'shared/create_post' %>
 
 <% @posts.each do |post| %>
 <div class="well well-lg">
   <h3><%= @users.find(post.author_id).name %></h3>
   <small><%= time_ago_in_words(post.created_at) %></small>
-  <hr>
   <p><%= post.content %></p>
   <p><%= post.likes %></p>
   <strong>Comments:</strong>
