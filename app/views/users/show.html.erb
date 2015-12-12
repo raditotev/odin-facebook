@@ -8,4 +8,21 @@
   </ul>
 </div>
 
+<% @posts.each do |post| %>
+<div class="well well-lg">
+  <h3><%= current_user.name %></h3>
+  <small><%= time_ago_in_words(post.created_at) %></small>
+  <hr>
+  <p><%= post.content %></p>
+  <p><%= post.likes %></p>
+  <strong>Comments:</strong>
+  <div>
+    <% post.comments.each do |c| %>
+    <p><%= c.content %></p>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+
 
