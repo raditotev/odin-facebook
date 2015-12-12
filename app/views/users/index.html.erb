@@ -1,7 +1,5 @@
-<h1>Users</h1>
 
 <table class="table table-striped">
-<caption>List of all users</caption>
   <thead>
     <tr>
       <th>Name</th>
@@ -9,11 +7,11 @@
     </tr>
   </thead>
   <tbody>
+  <% @users.each do |user| %>
     <tr>
-    <% @users.each do |u| %>
-      <td><%= u.name %></td>
-      <td><%= u.email %></td>
-      <% end %>
+      <td><%= user.name %></td>
+      <td><%= user.email %></td>
     </tr>
+  <% end %>
   </tbody>
 </table>

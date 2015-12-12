@@ -1,9 +1,8 @@
 # Reset DB
 
 User.destroy_all
-Post.destroy_all
 
-#Users
+# Create Users
 
 50.times do
   name = Faker::Name.name
@@ -17,9 +16,16 @@ Post.destroy_all
                       password_confirmation: password)
 end
 
-# Posts
+User.create!(name: "Radi",
+                    email: "radi@mail.com",
+                    password: "password",
+                    password_confirmation: "password")
+
+# Create Posts
 
 users = User.take(10)
+user = User.find_by(name: "Radi")
+users << user
 
 10.times do
   content = Faker::Lorem.sentence(5)
@@ -27,10 +33,10 @@ users = User.take(10)
 end
 
 
-# Friendships
+# Create Friendships
 
-user = User.last
-users = User.take(6)
+
+users = User.take(7)
 
 users.each {|friend| user.friends << friend}
 
