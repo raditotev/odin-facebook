@@ -15,9 +15,14 @@
   <small><%= time_ago_in_words(post.created_at) %></small>
   <p><%= post.content %></p>
   <p><%= post.likes %></p>
-  <strong>Comments:</strong>
+  <fieldset>
+    <div>
+      <%= link_to "Comment", new_comment_path(post_id: post.id) %>
+    </div>
+  </fieldset>
   <div>
     <% post.comments.each do |c| %>
+    <strong><%= c.user.name %></strong>
     <p><%= c.content %></p>
     <% end %>
   </div>
