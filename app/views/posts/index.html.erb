@@ -15,14 +15,14 @@
     <small><%= time_ago_in_words(post.created_at) %></small>
     <p><%= post.content %></p>
     <fieldset>
-    <% if post.likes.any? %>
-      <% post.likes.each do |like| %>
-        <% if like.user == current_user %>
-        <%= link_to "Unlike", like_path(post_id: post.id, user_id: current_user.id),
-        method: 'delete' %>
+      <% if post.likes.any? %>
+        <% post.likes.each do |like| %>
+          <% if like.user == current_user %>
+          <%= link_to "Unlike", like_path(post_id: post.id, user_id: current_user.id),
+          method: 'delete' %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
 
       <%= link_to "Like", likes_path(like: {post_id: post.id, user_id: current_user.id}),
       method: 'post' %>
@@ -35,18 +35,14 @@
         <% elsif post.likes.count > 1 %>
         <p>You and <%= 'other'.pluralize(post.likes.count - 1) %>  like this post</p>
         <% end %>
-      <% else %>
-        <% if post.likes.count == 1 %>
-        <p><%= post.likes.first.user.name %> likes this post</p>
-        <% elsif post.likes.count > 1 %>
-        <p><%= post.likes.last.user.name %> and <%= 'other'.pluralize(post.likes.count - 1) %> like this post</p>
-        <% end %>
+    <% else %>
+      <% if post.likes.count == 1 %>
+      <p><%= post.likes.first.user.name %> likes this post</p>
+      <% elsif post.likes.count > 1 %>
+      <p><%= post.likes.last.user.name %> and <%= 'other'.pluralize(post.likes.count - 1) %> like this post</p>
+      <% end %>
       <% end %>
     <% end %>
-
-
-
-
     <div>
       <% post.comments.each do |c| %>
       <strong><%= c.user.name %></strong>
