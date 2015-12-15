@@ -1,26 +1,64 @@
 <% if user_signed_in? %>
 <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <%= link_to image_tag('facebook') %>
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to image_tag('facebook') %>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to current_user.name, user_path(current_user) %></li>
+        <li><%= link_to 'Home', root_path %></li>
+        <li><%= link_to 'Users', users_path %></li>
+        <li><%= link_to 'Notifications', notifications_user_path(current_user) %></li>
+        <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+<% else %>
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to image_tag('facebook') %>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <form class="navbar-form navbar-right">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="form-group">
+          <p><%= f.label :email, class: "signin_label" %><br />
+                    <%= f.email_field :email, autofocus: true, class: 'form-control' %></p>
+          <% if devise_mapping.rememberable? -%>
+          <p class="signin_text">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </p>
+          <% end -%>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to current_user.name, user_path(current_user) %></li>
-            <li><%= link_to 'Home', root_path %></li>
-            <li><%= link_to 'Users', users_path %></li>
-            <li><%= link_to 'Notifications', notifications_user_path(current_user) %></li>
-            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+        <div class="form-group">
+          <p><%= f.label :password, class: "signin_label" %><br />
+                    <%= f.password_field :password, autocomplete: "off", class: 'form-control' %></p>
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+          <p><%= link_to "Forgot your password?", new_password_path(resource_name), class: "signin_text" %></p>
+          <% end -%>
+        </div>
+        <%= f.submit "Log in", class: 'btn btn-primary' %>
+        <% end %>
+      </form>
+    </div>
+  </div>
+</nav>
 <% end %>
 
 

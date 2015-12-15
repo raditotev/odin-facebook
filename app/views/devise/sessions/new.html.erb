@@ -1,26 +1,43 @@
-<h2>Log in</h2>
+<div class="row gradient">
+  <div class="col-md-6">
+    <h4 class="facebook_text_color">
+      Facebook helps you connect and share with the people in your life.
+    </h4>
+    <%= image_tag('sign_in') %>
+  </div>
+  <div class="col-md-6">
+    <h1 style="font-weight: bold;">Create an account</h1>
+    <h3>It's free and always will be.</h3>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="form-group">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, class: 'form-control' %>
+  </div>
+
   <div class="form-group">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, class: 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :password %><br />
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
     <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
   </div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="form-group">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end -%>
+  <div class="form-group">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+  </div>
 
-
-  <%= f.submit "Log in", class: 'btn btn-primary' %>
+    <%= f.submit "Create an account", class: 'btn btn-success btn-lg' %>
 
 <% end %>
 
-<%= render "devise/shared/links" %>
+  </div>
+<div>

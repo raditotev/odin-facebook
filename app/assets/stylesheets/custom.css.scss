@@ -33,3 +33,30 @@ fieldset{
   border-bottom: 1px solid #999;
 }
 
+/*Styling for sign in page*/
+
+input[type="radio"], input[type="checkbox"]{
+  margin: 0;
+}
+
+label{
+  margin: 0;
+}
+
+.signin_text{
+  color: #9daccb;
+}
+
+.signin_label{
+  color: #fff;
+}
+
+.facebook_text_color{
+  color: #0e385f;
+  font-weight: bold;
+}
+
+.gradient{
+  background: linear-gradient(white, #D3D8E8);
+}
+
