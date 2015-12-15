@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
   has_many :likes, dependent: :destroy
+
+  def to_param
+    username
+  end
 end
