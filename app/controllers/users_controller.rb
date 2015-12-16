@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     if Post.exists?(id: params[:id])
       @post = Post.find(params[:id])
     end
-    @posts = current_user.posts
+    @posts = current_user.posts.includes(:author, :comments, :likes)
   end
 
   def profile
