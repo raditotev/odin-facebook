@@ -4,12 +4,9 @@ class PostsController < ApplicationController
     @posts = []
     friends = current_user.friends.includes(:comments, :likes)
     friends.each do |friend|
-      friend.posts.each { |post| @posts << {post: post,
-                                                                comments: post.comments,
-                                                                likes: post.likes,
-                                                                } }
+      friend.posts.each { |post| @posts << post }
     end
-    @posts.sort_by! {|post| -post[:post].created_at.strftime("%s").to_i }
+    @posts.sort_by! {|post| -post.created_at.strftime("%s").to_i }
   end
 
   def create
@@ -20,6 +17,12 @@ class PostsController < ApplicationController
     else
       flash[:error] = "There was a problem...Post hasn't been created!"
     end
+  end
+
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+    redirect_to root_url
   end
 
   private

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :posts, only: [:create]
+  resources :posts, only: [:create, :destroy]
   resources :comments, only: [:new, :create, :destroy]
   resources :likes, only: [:create]
   delete 'like' => 'likes#destroy'
