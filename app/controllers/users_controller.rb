@@ -4,6 +4,9 @@ class UsersController < ApplicationController
   end
 
   def show
+    if Post.exists?(id: params[:id])
+      @post = Post.find(params[:id])
+    end
     @posts = current_user.posts
   end
 

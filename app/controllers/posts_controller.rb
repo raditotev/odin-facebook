@@ -19,6 +19,17 @@ class PostsController < ApplicationController
     end
   end
 
+  def update
+    post = Post.find(params[:id])
+    if post.update_attributes(post_params)
+      flash[:success] = "Post updated"
+      redirect_to current_user
+    else
+      flash[:error] = "Post wasn't updated!"
+      redirect_to current_user
+    end
+  end
+
   def destroy
     post = Post.find(params[:id])
     post.destroy

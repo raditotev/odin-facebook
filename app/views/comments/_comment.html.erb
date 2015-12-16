@@ -1,0 +1,21 @@
+<div class="form text-center">
+<strong>
+  <%= @post.content %>
+</strong>
+<br>
+<hr>
+
+  <%= form_for @comment do |f| -%>
+  <%= f.hidden_field :post_id, value: @post.id %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="form-group">
+    <%= f.text_area :content, class: "form-control", rows: "3", id: "comment" %>
+  </div>
+  <div>
+    <%= f.submit "Submit", class: "btn btn-default" %>
+  </div>
+<% end %>
+
+</div>
+
+

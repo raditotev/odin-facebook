@@ -8,6 +8,11 @@
   </ul>
 </div>
 
-<%= render 'shared/create_post' %>
+<% if @post %>
+  <%= render 'shared/update_post' %>
+<% else %>
+  <%= render 'shared/create_post' %>
+<% end %>
+
 
 <%= render @posts %>

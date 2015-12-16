@@ -13,6 +13,22 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit
+    @post = Post.find(params[:post_id])
+    @comment = Comment.find(params[:id])
+  end
+
+  def update
+    comment = Comment.find(params[:id])
+    if comment.update_attributes(comment_params)
+      flash[:success] = "Comment has been changed!"
+      redirect_to root_url
+    else
+      flash[:error] = "Something went wrong. Please try again."
+      redirect_to root_url
+    end
+  end
+
   def destroy
     comment = Comment.find(params[:id])
     comment.destroy

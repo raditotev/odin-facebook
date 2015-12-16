@@ -2,6 +2,7 @@
   <div class="well well-lg">
   <strong class="pull-right">
       <% if post.author == current_user %>
+        <%= link_to "Edit", user_path(id: post.id) %> |
         <%= link_to "Delete", post_path(post), method: 'delete' %>
       <% end %>
       </strong>
@@ -38,14 +39,15 @@
       <% end %>
     <% end %>
     <div>
-      <% post.comments.each do |c| %>
+      <% post.comments.each do |comment| %>
       <strong class="pull-right">
-      <% if c.user == current_user %>
-        <%= link_to "Delete", comment_path(c), method: 'delete' %>
+      <% if comment.user == current_user %>
+        <%= link_to "Edit", edit_comment_path(id: comment.id, post_id: post.id) %> |
+        <%= link_to "Delete", comment_path(comment), method: 'delete' %>
       <% end %>
       </strong>
-      <strong><%= c.user.name %></strong>
-      <p><%= c.content %></p>
+      <strong><%= comment.user.name %></strong>
+      <p><%= comment.content %></p>
       <% end %>
     </div>
   </div>
