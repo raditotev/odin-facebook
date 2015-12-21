@@ -6,6 +6,9 @@
     <%= image_tag('sign_in') %>
   </div>
   <div class="col-md-6">
+  <div class="text-center">
+    <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), class: 'btn btn-primary btn-lg' %>
+  </div>
     <h1 style="font-weight: bold;">Create an account</h1>
     <h3>It's free and always will be.</h3>
 

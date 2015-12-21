@@ -35,6 +35,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Authentication
 gem 'devise'
 
+gem 'omniauth-facebook'
+
 # Styling
 gem 'bootstrap-sass'
 
