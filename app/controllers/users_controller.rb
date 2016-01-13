@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   end
 
   def friends
+    @invitations = current_user.invitations
     # @friends = current_user.friends
   end
 

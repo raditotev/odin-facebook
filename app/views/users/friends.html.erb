@@ -1,1 +1,12 @@
-<h1><%= current_user.name %>'s Friends List</h1>
+<% if @invitations.any? %>
+<h1>Pending Friends Requests</h1>
+<div>
+  <% @invitations.each do |invitation| %>
+  <h3><%= invitation.from_user.name %></h3>
+  <p><%= invitation.from_user.email %></p>
+  <%= link_to "Accept" %>
+  <% end %>
+</div>
+
+<% end %>
+
