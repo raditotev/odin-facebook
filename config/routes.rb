@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :likes, only: [:create]
   delete 'like' => 'likes#destroy'
   resources :invitations, only: [:create]
+  resources :friendships, only: [:create]
 
   resources :users do
     member do

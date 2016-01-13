@@ -15,8 +15,8 @@ class UsersController < ApplicationController
   end
 
   def friends
-    @invitations = current_user.invitations
-    # @friends = current_user.friends
+    @invitations = current_user.invitations.where(approved: false).includes(:from_user)
+    @friendships = current_user.friendships.includes(:friend)
   end
 
   def notifications
