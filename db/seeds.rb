@@ -23,7 +23,7 @@ User.create!(name: "Radi",
 
 # Create Posts
 
-users = User.take(10)
+users = User.first(10)
 user = User.find_by(name: "Radi")
 users << user
 

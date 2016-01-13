@@ -21,7 +21,7 @@
     <div class="tab-pane" id="tab2">
       <h3>Work place</h3>
       <hr>
-      <% if @info.work %>
+      <% if @info && @info.work %>
         <p><%= @info.work %></p>
       <% else %>
         <p>Not given</p>
@@ -31,7 +31,7 @@
     <div class="tab-pane" id="tab3">
       <h3>University or High School Attended</h3>
       <hr>
-      <% if @info.education %>
+      <% if @info && @info.education %>
         <p><%= @info.education %></p>
       <% else %>
         <p>Not given</p>
@@ -40,7 +40,7 @@
     <div class="tab-pane" id="tab4">
       <h3>Residence Information</h3>
       <hr>
-      <% if @info.address %>
+      <% if @info && @info.address %>
         <p><%= @info.address %></p>
       <% else %>
         <p>Not given</p>
@@ -49,7 +49,7 @@
     <div class="tab-pane" id="tab5">
       <h3>Phone coordinates</h3>
       <hr>
-      <% if @info.phone %>
+      <% if @info && @info.phone %>
         <p><%= @info.phone %></p>
       <% else %>
         <p>Not given</p>
@@ -58,7 +58,7 @@
     <div class="tab-pane" id="tab6">
       <h3>Date of birth</h3>
       <hr>
-      <% if @info.birthday.strftime('%d %B %Y') %>
+      <% if @info && @info.birthday.strftime('%d %B %Y') %>
         <p><%= @info.birthday.strftime('%d %B %Y') %></p>
       <% else %>
         <p>Not given</p>
