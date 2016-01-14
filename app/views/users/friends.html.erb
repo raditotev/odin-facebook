@@ -21,6 +21,7 @@
   <% @friendships.each do |friendship| %>
   <h3><%= friendship.friend.name %></h3>
   <p><%= friendship.friend.email %></p>
+  <%= link_to "Unfriend", friendship_path(friendship), method: "delete" %>
   <% end %>
 </div>
 <% end %>
