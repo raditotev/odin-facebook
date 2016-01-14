@@ -10,6 +10,7 @@
                                                                 },
                                                               invitation: invitation.id),
                                     method: "post" %>
+  <%= link_to "Deny", invitation_path(invitation), method: "patch" %>
   <% end %>
 </div>
 <% end %>
