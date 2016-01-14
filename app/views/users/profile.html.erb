@@ -1,6 +1,6 @@
 <div class="jumbotron">
   <div class="container">
-  <h1><%= current_user.name %>'s Profile</h1>
+  <h1><%= @user.name %>'s Profile</h1>
   </div>
 </div>
 
@@ -15,8 +15,8 @@
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="tab1">
-      <p>Name: <%= current_user.name %></p>
-      <p>Email: <%= current_user.email %></p>
+      <p>Name: <%= @user.name %></p>
+      <p>Email: <%= @user.email %></p>
     </div>
     <div class="tab-pane" id="tab2">
       <h3>Work place</h3>
@@ -68,10 +68,12 @@
 </div>
 
 <div class="text-center">
-<% if @info %>
-  <%= link_to 'Update profile', edit_info_path(@info), class: 'btn btn-success btn-lg' %>
-<% else %>
-<%= link_to 'Create profile', new_info_path, class: 'btn btn-success btn-lg' %>
+<% if @user == current_user %>
+  <% if @info %>
+    <%= link_to 'Update profile', edit_info_path(@info), class: 'btn btn-success btn-lg' %>
+  <% else %>
+  <%= link_to 'Create profile', new_info_path, class: 'btn btn-success btn-lg' %>
+  <% end %>
 <% end %>
 
 </div>

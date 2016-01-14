@@ -1,28 +1,43 @@
-<% if @invitations.any? %>
-<h1>Pending Friends Requests</h1>
-<div>
-  <% @invitations.each do |invitation| %>
-  <h3><%= invitation.from_user.name %></h3>
-  <p><%= invitation.from_user.email %></p>
-  <%= link_to "Accept", friendships_path(friendship: {
-                                                                user_id: current_user.id,
-                                                                friend_id: invitation.from_user.id
-                                                                },
-                                                              invitation: invitation.id),
-                                    method: "post" %>
-  <%= link_to "Deny", invitation_path(invitation), method: "patch" %>
-  <% end %>
-</div>
+<div class="col-md-6">
+  <% if @friendships.any? %>
+<h1>
+<% if @user == current_user %>
+  Your friends
+<% else %>
+  <%= @user.name %>'s friends
 <% end %>
-
-<% if @friendships.any? %>
-<h1>Your friends</h1>
+</h1>
 <div>
   <% @friendships.each do |friendship| %>
-  <h3><%= friendship.friend.name %></h3>
+  <h3><%= link_to "#{friendship.friend.name}",
+                              user_path(friendship.friend) %></h3>
   <p><%= friendship.friend.email %></p>
-  <%= link_to "Unfriend", friendship_path(friendship), method: "delete" %>
+  <% if @user == current_user %>
+    <%= link_to "Unfriend", friendship_path(friendship), method: "delete" %>
+    <% end %>
   <% end %>
 </div>
 <% end %>
+</div>
 
+<div class="col-md-6">
+  <% if @invitations.any? %>
+<h1>Pending Friends Requests</h1>
+<div>
+<% if @user == current_user %>
+    <% @invitations.each do |invitation| %>
+    <h3><%= link_to "#{invitation.from_user.name}",
+                                user_path(invitation.from_user) %></h3>
+    <p><%= invitation.from_user.email %></p>
+    <%= link_to "Accept", friendships_path(friendship: {
+                                                                  user_id: current_user.id,
+                                                                  friend_id: invitation.from_user.id
+                                                                  },
+                                                                invitation: invitation.id),
+                                      method: "post" %>
+    <%= link_to "Deny", invitation_path(invitation), method: "patch" %>
+    <% end %>
+  <% end %>
+</div>
+<% end %>
+</div>
