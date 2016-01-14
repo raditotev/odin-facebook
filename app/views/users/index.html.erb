@@ -1,8 +1,10 @@
 <% @users.each do |user| %>
+<% unless current_user.friendships.exists?(friend_id:user.id) %>
   <div style="padding: 10px 0;">
     <h3><%= user.name %></h3>
     <p><%= user.email %></p>
     <%= link_to "Send friends request",
              invitations_path(invitation: {from_user_id: current_user.id, to_user_id: user.id}), method: "post" %>
   </div>
+  <% end %>
 <% end %>
