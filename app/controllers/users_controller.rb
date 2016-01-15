@@ -1,7 +1,19 @@
 class UsersController < ApplicationController
   before_action :set_user, except: [:index]
+
   def index
-    @users = User.all
+    not_listed_users = [current_user]
+    current_user.friends.each { |friend| not_listed_users << friend }
+    current_user.invites.each { |invitee| not_listed_users << invitee }
+    current_user.invitations.each { |invitation| not_listed_users << invitation }
+    all_users = User.all
+    @users = []
+    all_users.each do |user|
+      unless not_listed_users.include? user
+        @users << user
+      end
+    end
+    @users
   end
 
   def show
@@ -16,8 +28,8 @@ class UsersController < ApplicationController
   end
 
   def friends
-    @invitations = @user.invitations.where(approved: false).includes(:from_user)
-    @friendships = @user.friendships.order(id: :desc).includes(:friend)
+    @invitations = @user.received_invitations.where(approved: false).includes(:from_user)
+    @friends = @user.friends.order(username: :asc)
   end
 
   def notifications

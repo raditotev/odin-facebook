@@ -1,5 +1,5 @@
 <div class="col-md-6">
-  <% if @friendships.any? %>
+  <% if @friends.any? %>
 <h1>
 <% if @user == current_user %>
   Your friends
@@ -8,12 +8,12 @@
 <% end %>
 </h1>
 <div>
-  <% @friendships.each do |friendship| %>
-  <h3><%= link_to "#{friendship.friend.name}",
-                              user_path(friendship.friend) %></h3>
-  <p><%= friendship.friend.email %></p>
+  <% @friends.each do |friend| %>
+  <h3><%= link_to "#{friend.name}",
+                              user_path(friend) %></h3>
+  <p><%= friend.email %></p>
   <% if @user == current_user %>
-    <%= link_to "Unfriend", friendship_path(friendship), method: "delete" %>
+    <%= link_to "Unfriend", friendship_path(friend.id), method: "delete" %>
     <% end %>
   <% end %>
 </div>

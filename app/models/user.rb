@@ -10,10 +10,16 @@ class User < ActiveRecord::Base
 
   has_many :posts, foreign_key: "author_id", dependent: :destroy
   has_one :info, dependent: :destroy
-  has_many :invitations, foreign_key: "to_user_id", dependent: :destroy
+
+  has_many :sent_invitations, class_name: "Invitation",
+                  foreign_key: "from_user_id", dependent: :destroy
+  has_many :invites, through: :sent_invitations, source: "to_user"
+  has_many :received_invitations, class_name: "Invitation",
+                  foreign_key: "to_user_id", dependent: :destroy
+  has_many :invitations, through: :received_invitations, source: "from_user"
 
   has_many :friendships, dependent: :destroy
-  has_many :friends, through: :friendships, foreign_key: "user_id"
+  has_many :friends, through: :friendships, source: "friend"
 
   has_many :comments, dependent: :destroy
 
