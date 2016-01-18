@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 
   has_many :likes, dependent: :destroy
 
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
 
   def to_param
     username

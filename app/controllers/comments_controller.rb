@@ -7,6 +7,9 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
+      author = @comment.post.author
+      notification = Notification.create!(user: author)
+      @comment.update_attributes(notification: notification)
       redirect_to root_url
     else
       redirect_to root_url
@@ -31,6 +34,7 @@ class CommentsController < ApplicationController
 
   def destroy
     comment = Comment.find(params[:id])
+    comment.notification.destroy
     comment.destroy
     redirect_to root_url
   end
