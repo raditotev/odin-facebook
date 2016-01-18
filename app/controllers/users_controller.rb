@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def index
     not_listed_users = [current_user]
     current_user.friends.each { |friend| not_listed_users << friend }
-    current_user.invites.each { |invitee| not_listed_users << invitee }
+    current_user.invites.each { |invite| not_listed_users << invite }
     current_user.invitations.each { |invitation| not_listed_users << invitation }
     all_users = User.all
     @users = []
