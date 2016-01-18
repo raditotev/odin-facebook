@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222114453) do
+ActiveRecord::Schema.define(version: 20160118115050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,13 +61,23 @@ ActiveRecord::Schema.define(version: 20151222114453) do
   create_table "likes", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "user_id"
-    t.integer  "count",      default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "count",           default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "notification_id"
   end
 
+  add_index "likes", ["notification_id"], name: "index_likes_on_notification_id", using: :btree
   add_index "likes", ["post_id"], name: "index_likes_on_post_id", using: :btree
   add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.integer  "author_id"
@@ -109,6 +119,8 @@ ActiveRecord::Schema.define(version: 20151222114453) do
   add_foreign_key "comments", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "infos", "users"
+  add_foreign_key "likes", "notifications"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "notifications", "users"
 end

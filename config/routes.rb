@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   delete 'like' => 'likes#destroy'
   resources :invitations, only: [:create, :update]
   resources :friendships, only: [:create, :destroy]
+  resources :notifications, only: [:new, :create]
 
   resources :users do
     member do
