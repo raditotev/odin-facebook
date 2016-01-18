@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160118142333) do
+ActiveRecord::Schema.define(version: 20160118143739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,10 +54,12 @@ ActiveRecord::Schema.define(version: 20160118142333) do
   create_table "invitations", force: :cascade do |t|
     t.integer "from_user_id"
     t.integer "to_user_id"
-    t.boolean "approved",     default: false
+    t.boolean "approved",        default: false
+    t.integer "notification_id"
   end
 
   add_index "invitations", ["from_user_id"], name: "index_invitations_on_from_user_id", using: :btree
+  add_index "invitations", ["notification_id"], name: "index_invitations_on_notification_id", using: :btree
   add_index "invitations", ["to_user_id"], name: "index_invitations_on_to_user_id", using: :btree
 
   create_table "likes", force: :cascade do |t|
@@ -122,6 +124,7 @@ ActiveRecord::Schema.define(version: 20160118142333) do
   add_foreign_key "comments", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "infos", "users"
+  add_foreign_key "invitations", "notifications"
   add_foreign_key "likes", "notifications"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"

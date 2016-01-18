@@ -3,6 +3,9 @@ class InvitationsController < ApplicationController
   def create
     invitation = Invitation.new(invitation_params)
     if invitation.save
+      recipient = invitation.to_user
+      notification = Notification.create!(user: recipient)
+      invitation.update_attributes(notification: notification)
       flash[:success] = "Invitation sent!"
       redirect_to users_path
     else
