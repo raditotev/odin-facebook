@@ -1,1 +1,16 @@
-<h1>Notifications page</h1>
+<h1>Your notifications</h1>
+
+<% if @notifications.any? %>
+  <% @notifications.each do |notification| %>
+  <div class="read-<%= notification.read %>">
+    <% if notification.notifiable_type == 'Like' %>
+      <p><%= notification.notifiable.user.name %> likes your post "<%= notification.notifiable.post.content[0..10] %>..."</p>
+    <% elsif notification.notifiable_type == 'Comment' %>
+      <p><%= notification.notifiable.user.name %> commented on your post "<%= notification.notifiable.post.content[0..10] %>..."</p>
+    <% elsif notification.notifiable_type == 'Invitation' %>
+      <p><%= notification.notifiable.from_user.name %> send you friend's request</p>
+    <% end %>
+    </div>
+  <% notification.update_attributes(read: true) %>
+  <% end %>
+<% end %>

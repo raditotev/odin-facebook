@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def notifications
-
+    @notifications = current_user.notifications.order(id: :desc)
   end
 
   def set_user
