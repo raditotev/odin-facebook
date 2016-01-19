@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
- belongs_to :post
- belongs_to :user
- has_one :notification, as: :notifiable,
- dependent: :destroy
+  include Notifiable
+
+  belongs_to :post
+  belongs_to :user
 end

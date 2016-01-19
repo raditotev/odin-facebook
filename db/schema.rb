@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160118173842) do
+ActiveRecord::Schema.define(version: 20160119111406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,13 +19,11 @@ ActiveRecord::Schema.define(version: 20160118173842) do
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id"
     t.text     "content"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "user_id"
-    t.integer  "notification_id"
   end
 
-  add_index "comments", ["notification_id"], name: "index_comments_on_notification_id", using: :btree
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
@@ -54,24 +52,20 @@ ActiveRecord::Schema.define(version: 20160118173842) do
   create_table "invitations", force: :cascade do |t|
     t.integer "from_user_id"
     t.integer "to_user_id"
-    t.boolean "approved",        default: false
-    t.integer "notification_id"
+    t.boolean "approved",     default: false
   end
 
   add_index "invitations", ["from_user_id"], name: "index_invitations_on_from_user_id", using: :btree
-  add_index "invitations", ["notification_id"], name: "index_invitations_on_notification_id", using: :btree
   add_index "invitations", ["to_user_id"], name: "index_invitations_on_to_user_id", using: :btree
 
   create_table "likes", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "user_id"
-    t.integer  "count",           default: 0
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "notification_id"
+    t.integer  "count",      default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "likes", ["notification_id"], name: "index_likes_on_notification_id", using: :btree
   add_index "likes", ["post_id"], name: "index_likes_on_post_id", using: :btree
   add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
 
@@ -85,7 +79,6 @@ ActiveRecord::Schema.define(version: 20160118173842) do
   end
 
   add_index "notifications", ["notifiable_id", "notifiable_type"], name: "index_notifications_on_notifiable_id_and_notifiable_type", unique: true, using: :btree
-  add_index "notifications", ["notifiable_id"], name: "index_notifications_on_notifiable_id", using: :btree
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
@@ -124,13 +117,10 @@ ActiveRecord::Schema.define(version: 20160118173842) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
-  add_foreign_key "comments", "notifications"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "friendships", "users"
   add_foreign_key "infos", "users"
-  add_foreign_key "invitations", "notifications"
-  add_foreign_key "likes", "notifications"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "notifications", "users"
