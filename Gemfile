@@ -63,6 +63,8 @@ group :development do
   group :production do
     # Static assets
     gem 'rails_12factor'
+    # Production webserver
+    gem "puma"
   end
 end
 
