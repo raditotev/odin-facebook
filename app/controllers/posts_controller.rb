@@ -8,6 +8,10 @@ class PostsController < ApplicationController
     @posts.sort_by! {|post| -post.created_at.strftime("%s").to_i }
   end
 
+  def show
+    @post = Post.find(params[:id])
+  end
+
   def create
     post = current_user.posts.build(post_params)
     if post.save

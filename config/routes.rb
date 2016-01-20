@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :infos, only: [:new, :edit, :create, :update]
-  resources :posts, only: [:create, :update, :destroy]
+  resources :posts, only: [:create, :update, :show, :destroy]
   resources :comments, only: [:new, :create, :edit, :update, :destroy]
   resources :likes, only: [:create]
   delete 'like' => 'likes#destroy'
