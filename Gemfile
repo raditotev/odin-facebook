@@ -59,5 +59,10 @@ group :development do
   gem 'spring'
 
   gem 'letter_opener'
+
+  group :production do
+    # Static assets
+    gem 'rails_12factor'
+  end
 end
 
