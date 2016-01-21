@@ -28,7 +28,8 @@ module FacebookApp
     # config.assets.initialize_on_precompile = false
 
     # Enable serving of static assets
-    config.serve_static_assets = true
+    # config.serve_static_assets = true
+    config.assets.compile=true
 
   end
 end
