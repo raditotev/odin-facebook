@@ -61,8 +61,10 @@ group :development do
   gem 'letter_opener'
 
   group :production do
-    # Static assets
+    # Serving static assets
     gem 'rails_12factor'
+    gem 'rails_serve_static_assets'
+    gem 'rails_stdout_logging'
     # Production webserver
     gem "puma"
   end
