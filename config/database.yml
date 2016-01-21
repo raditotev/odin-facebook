@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: facebook_app_production
-  username: facebook_app
+  username: <%= ENV['FACEBOOK_APP_DATABASE_USERNAME'] %>
   password: <%= ENV['FACEBOOK_APP_DATABASE_PASSWORD'] %>
