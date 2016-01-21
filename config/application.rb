@@ -25,7 +25,10 @@ module FacebookApp
     # Path to notifiable.rb hook
     config.autoload_paths<<Rails.root.join('lib')
     # Stop assets precompile
-    config.assets.initialize_on_precompile = true
+    # config.assets.initialize_on_precompile = false
+
+    # Enable serving of static assets
+    config.serve_static_assets = true
 
   end
 end
