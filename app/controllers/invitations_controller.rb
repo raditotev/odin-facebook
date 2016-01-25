@@ -16,15 +16,21 @@ class InvitationsController < ApplicationController
 
   def update
     invitation = Invitation.find(params[:id])
-    invitation.update_attributes(approved: nil)
-    flash[:success] = "Request has been denied."
-    redirect_to friends_user_path current_user
+    if invitation_params[:approved]
+      invitation.update_attributes(invitation_params)
+      flash[:success] = "Request has been approved."
+      redirect_to friends_user_path current_user
+    elsif invitation_params[:approved] == nil
+      invitation.update_attributes(invitation_params)
+      flash[:success] = "Request has been denied."
+      redirect_to friends_user_path current_user
+    end
   end
 
   private
 
   def invitation_params
-    params.require(:invitation).permit(:from_user_id, :to_user_id)
+    params.require(:invitation).permit(:from_user_id, :to_user_id, :approved)
   end
 
 end

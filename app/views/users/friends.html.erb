@@ -29,13 +29,8 @@
     <h3><%= link_to "#{invitation.from_user.name}",
                                 user_path(invitation.from_user) %></h3>
     <p><%= invitation.from_user.email %></p>
-    <%= link_to "Accept", friendships_path(friendship: {
-                                                                  user_id: current_user.id,
-                                                                  friend_id: invitation.from_user.id
-                                                                  },
-                                                                invitation: invitation.id),
-                                      method: "post" %>
-    <%= link_to "Deny", invitation_path(invitation), method: "patch" %>
+    <%= link_to "Accept", invitation_path(id: invitation.id, invitation: {approved: true}), method: "patch" %>
+    <%= link_to "Deny", invitation_path(id: invitation.id, invitation: {approved: nil}), method: "patch" %>
     <% end %>
   <% end %>
 </div>

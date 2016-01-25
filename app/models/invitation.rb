@@ -10,7 +10,7 @@ class Invitation < ActiveRecord::Base
 
   def create_friendship
     if self.approved_changed? && self.approved == true
-      Friendship.create!(user: from_user, friend: to_user)
+      Friendship.create!(user: self.from_user, friend: self.to_user)
     end
   end
 end
