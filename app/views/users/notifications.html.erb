@@ -4,9 +4,23 @@
   <% @notifications.each do |notification| %>
   <div class="read-<%= notification.read %>">
     <% if notification.notifiable_type == 'Like' %>
-      <p><%= notification.notifiable.user.name %> likes your post "<%= link_to notification.notifiable.post.content[0..10], post_path(notification.notifiable.post) %>..."</p>
+    <p>
+        <% if notification.notifiable.user == current_user %>
+          You like this post
+          <% else %>
+        <%= notification.notifiable.user.name %> likes your post
+         <% end %>
+        "<%= link_to notification.notifiable.post.content[0..10], post_path(notification.notifiable.post) %>..."
+      </p>
     <% elsif notification.notifiable_type == 'Comment' %>
-      <p><%= notification.notifiable.user.name %> commented on your post "<%= link_to notification.notifiable.post.content[0..10], post_path(notification.notifiable.post) %>..."</p>
+      <p>
+        <% if notification.notifiable.user == current_user %>
+          You
+        <% else %>
+          <%= notification.notifiable.user.name %>
+        <% end %>
+        commented your post "<%= link_to notification.notifiable.post.content[0..10], post_path(notification.notifiable.post) %>..."
+      </p>
     <% elsif notification.notifiable_type == 'Invitation' %>
       <p><%= link_to notification.notifiable.from_user.name, user_path(notification.notifiable.from_user) %> send you friend's request</p>
     <% end %>
