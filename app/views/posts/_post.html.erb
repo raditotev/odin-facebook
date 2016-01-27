@@ -1,51 +1,57 @@
+<div class="container">
   <% @posts.each do |post| %>
-  <div class="well well-lg">
-  <strong class="pull-right">
-      <% if post.author == current_user %>
-        <%= link_to "Edit", user_path(id: post.id) %> |
-        <%= link_to "Delete", post_path(post), method: 'delete' %>
-      <% end %>
-      </strong>
-    <h3><%= post.author.name %></h3>
-    <small><%= time_ago_in_words(post.created_at) %></small>
-    <p><%= post.content %></p>
-    <fieldset>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= post.author.name %> <small class="muted">posted <%= time_ago_in_words(post.created_at) %> ago</small></h3>
+    </div>
+    <div class="panel-body">
+      <%= post.content %>
+    </div>
+    <div class="panel-footer">
+      <div>
       <% if post.likes.map{|like| like.user}.include? current_user %>
         <%= link_to "Unlike", like_path(post_id: post.id, user_id: current_user.id),
-                                          method: 'delete' %>
+                                            method: 'delete' %>
       <% else %>
-        <%= link_to "Like", likes_path(like: {post_id: post.id, user_id: current_user.id}),
-                                          method: 'post' %>
-      <% end %>
+          <%= link_to "Like", likes_path(like: {post_id: post.id, user_id: current_user.id}),
+                                            method: 'post' %>
       <%= link_to "Comment", new_comment_path(post_id: post.id) %>
-    </fieldset>
-    <% if post.likes.any? %>
-      <% if post.likes.find_by(user: current_user.id) %>
-        <% if post.likes.count == 1 %>
-        <p>You like this post</p>
-        <% elsif post.likes.count > 1 %>
-        <p>You and <%= 'other'.pluralize(post.likes.count - 1) %>  like this post</p>
+      <% end %>
+      </div>
+      <div>
+        <% if post.likes.any? %>
+          <% if post.likes.find_by(user: current_user.id) %>
+            <% if post.likes.count == 1 %>
+            You like this post
+            <% elsif post.likes.count > 1 %>
+            You and <%= 'other'.pluralize(post.likes.count - 1) %>  like this post
+            <% end %>
+        <% else %>
+          <% if post.likes.count == 1 %>
+            <%= post.likes.first.user.name %> likes this post
+          <% elsif post.likes.count > 1 %>
+            <%= post.likes.last.user.name %> and <%= 'other'.pluralize(post.likes.count - 1) %> like this post
+          <% end %>
         <% end %>
-    <% else %>
-      <% if post.likes.count == 1 %>
-      <p><%= post.likes.first.user.name %> likes this post</p>
-      <% elsif post.likes.count > 1 %>
-      <p><%= post.likes.last.user.name %> and <%= 'other'.pluralize(post.likes.count - 1) %> like this post</p>
       <% end %>
-      <% end %>
-    <% end %>
-    <div>
-      <% post.comments.each do |comment| %>
-      <strong class="pull-right">
-      <% if comment.user == current_user %>
-        <%= link_to "Edit", edit_comment_path(id: comment.id, post_id: post.id) %> |
-        <%= link_to "Delete", comment_path(comment), method: 'delete' %>
-      <% end %>
-      </strong>
-      <strong><%= comment.user.name %></strong>
-      <p><%= comment.content %></p>
-      <% end %>
+      </div>
+      <div>
+        <% post.comments.each do |comment| %>
+        <strong class="pull-right">
+        <% if comment.user == current_user %>
+          <%= link_to "Edit", edit_comment_path(id: comment.id, post_id: post.id) %> |
+          <%= link_to "Delete", comment_path(comment), method: 'delete' %>
+        <% end %>
+        </strong>
+        <strong><%= comment.user.name %></strong>
+        <p><%= comment.content %></p>
+        <% end %>
+      </div>
     </div>
+
   </div>
   <% end %>
+  </div>
+
+
 
