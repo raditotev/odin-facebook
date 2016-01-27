@@ -1,0 +1,45 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Your notifications</h4>
+      </div>
+      <div class="modal-body">
+        <% if notifications %>
+          <% notifications.each do |notification| %>
+          <div class="read-<%= notification.read %>">
+            <% if notification.notifiable_type == 'Like' %>
+            <p>
+                <% if notification.notifiable.user == current_user %>
+                  You like this post
+                  <% else %>
+                <%= notification.notifiable.user.name %> likes your post
+                 <% end %>
+                "<%= link_to notification.notifiable.post.content[0..10], post_path(notification.notifiable.post) %>..."
+              </p>
+            <% elsif notification.notifiable_type == 'Comment' %>
+              <p>
+                <% if notification.notifiable.user == current_user %>
+                  You
+                <% else %>
+                  <%= notification.notifiable.user.name %>
+                <% end %>
+                commented your post "<%= link_to notification.notifiable.post.content[0..10], post_path(notification.notifiable.post) %>..."
+              </p>
+            <% elsif notification.notifiable_type == 'Invitation' %>
+              <p><%= link_to notification.notifiable.from_user.name, user_path(notification.notifiable.from_user) %> send you friend's request</p>
+            <% end %>
+            </div>
+          <% notification.update_attributes(read: true) %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
