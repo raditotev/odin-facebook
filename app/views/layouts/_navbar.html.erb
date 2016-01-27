@@ -15,7 +15,13 @@
         <li><%= link_to current_user.name, user_path(current_user) %></li>
         <li><%= link_to 'Home', root_path %></li>
         <li><%= link_to 'Users', users_path %></li>
-        <li><%= link_to "Notifications (#{ count })", notifications_user_path(current_user) %></li>
+        <li><%= link_to "Notifications", notifications_user_path(current_user), class: "notification" %>
+        <% if count == 0 %>
+          <span class="label label-info"><%= count %></span>
+        <% else %>
+          <span class="label label-warning"><%= count %></span>
+        <% end %>
+        </li>
         <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
       </ul>
     </div><!--/.nav-collapse -->

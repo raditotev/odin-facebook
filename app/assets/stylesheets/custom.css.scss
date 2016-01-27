@@ -10,6 +10,8 @@
   @extend .alert-info;
 }
 
+/* Navbar */
+
 .navbar-default {
   background-image: none;
   background-color: #3b5998;
@@ -38,6 +40,18 @@
 #forgot-password{
   margin-top: 5px;
 }
+
+.notification{
+  position: absolute;
+}
+
+.label{
+  position: absolute;
+  top: 10px;
+  right: -5px;
+}
+
+/* User Profile */
 
 .tab-pane > h3 {
   font-weight: 600;
@@ -83,5 +97,11 @@ label{
 /* New user form */
 .new_user{
   margin-bottom: 10px;
+}
+
+/* User Profile Page */
+
+.tabbable{
+  margin-bottom: 20px;
 }
 
