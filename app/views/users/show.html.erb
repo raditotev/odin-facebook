@@ -1,18 +1,24 @@
 <div class="container">
   <div class="jumbotron">
-    <h1><%= @user.name %></h1>
+  <h1><%= @user.name %></h1>
+  <h4 id="about"><%= link_to 'About', profile_user_path %></h4>
+  <h4 id="friends"><%= link_to 'Friends', friends_user_path %></h4>
   </div>
-  <ul class="nav nav-tabs">
-    <li><%= link_to 'About', profile_user_path %></li>
-    <li><%= link_to 'Friends', friends_user_path %></li>
-  </ul>
 </div>
 
-<% if @post %>
-  <%= render 'shared/update_post' %>
-<% else %>
-  <%= render 'shared/create_post' %>
-<% end %>
 
 
-<%= render @posts %>
+    <% if @post %>
+      <%= render 'shared/update_post' %>
+    <% else %>
+      <%= render 'shared/create_post' %>
+    <% end %>
+
+    <%= render @posts %>
+
+
+
+
+
+
+
