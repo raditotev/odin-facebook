@@ -63,6 +63,10 @@ fieldset{
   border-bottom: 1px solid #999;
 }
 
+.tabbable{
+  margin-bottom: 20px;
+}
+
 /*Styling for sign in page*/
 
 input[type="radio"], input[type="checkbox"]{
@@ -99,9 +103,16 @@ label{
   margin-bottom: 10px;
 }
 
-/* User Profile Page */
+/* Comments */
 
-.tabbable{
-  margin-bottom: 20px;
+.well{
+  margin: 5px 5px;
+  padding: 5px 5px;
+  background-color: #F2F2F2;
 }
 
+/* Post */
+
+#create-post{
+  margin: 20px 0;
+}
