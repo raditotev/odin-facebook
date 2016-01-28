@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     if Post.exists?(id: params[:id])
       @post = Post.find(params[:id])
     end
-    @posts = @user.posts.includes(:author, :comments, :likes)
+    @posts = @user.posts.order(id: :desc).includes(:author, :comments, :likes)
   end
 
   def profile
