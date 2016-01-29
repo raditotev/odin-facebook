@@ -2,6 +2,10 @@
 @import "bootstrap";
 @import 'bootstrap/theme';
 
+html, body{
+  height: 100%;
+}
+
 .alert-alert {
   @extend .alert-warning;
 }
@@ -107,9 +111,14 @@ label{
   background-color: #eee
 }
 
-/* New user form */
+/* Login Page */
+
 .new_user{
   margin-bottom: 10px;
+}
+
+#login{
+  height: 100%;
 }
 
 /* Comments */
