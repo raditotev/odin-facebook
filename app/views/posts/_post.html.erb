@@ -15,7 +15,6 @@
       <% else %>
           <%= link_to "Like", likes_path(like: {post_id: post.id, user_id: current_user.id}),
                                             method: 'post' %>
-      <%= link_to "Comment", new_comment_path(post_id: post.id) %>
       <% end %>
       </div>
       <div>
@@ -35,23 +34,13 @@
         <% end %>
       <% end %>
       </div>
-      <% post.comments.each do |comment| %>
-      <div class="well">
-      <% if comment.user == current_user %>
-        <div class="dropdown pull-right">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "Edit", edit_comment_path(id: comment.id, post_id: post.id) %></li>
-            <li><%= link_to "Delete", comment_path(comment), method: 'delete' %></li>
-          </ul>
-        </div>
-        <% end %>
-        <strong><%= comment.user.name %></strong>
-        <p><%= comment.content %></p>
+
+      <div id="comments">
+      <%= render post.comments %>
       </div>
-      <% end %>
-      <div class="well clearfix" id="post-comment">
-        <%= form_for(:comment, url: comments_path, html: {class: "form"}) do |f| %>
+
+      <div id="comment_form">
+        <%= form_for(:comment, url: comments_path, html: {class: "form", id: "create_comment"}, remote: true) do |f| %>
           <%= f.hidden_field :post_id, value: post.id %>
           <%= f.hidden_field :user_id, value: current_user.id %>
           <div class="input-group">

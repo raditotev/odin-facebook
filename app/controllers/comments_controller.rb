@@ -10,22 +10,27 @@ class CommentsController < ApplicationController
       author = @comment.post.author
       notification = Notification.create!(user: author)
       @comment.update_attributes(notification: notification)
-      redirect_to root_url
+      respond_to do |format|
+        format.html { redirect_to root_url }
+        format.js
+      end
     else
       redirect_to root_url
     end
   end
 
   def edit
-    @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:id])
   end
 
   def update
-    comment = Comment.find(params[:id])
-    if comment.update_attributes(comment_params)
-      flash[:success] = "Comment has been changed!"
-      redirect_to root_url
+    @comment = Comment.find(params[:id])
+    if @comment.update_attributes(comment_params)
+      flash.now[:success] = "Comment has been edited!"
+      respond_to do |format|
+        format.html {redirect_to root_url}
+        format.js
+      end
     else
       flash[:error] = "Something went wrong. Please try again."
       redirect_to root_url
@@ -33,10 +38,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    comment = Comment.find(params[:id])
-    comment.notification.destroy
-    comment.destroy
-    redirect_to root_url
+    @comment = Comment.find(params[:id])
+    @comment.notification.destroy
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.js
+    end
   end
 
   private
