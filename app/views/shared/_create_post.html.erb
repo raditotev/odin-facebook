@@ -1,17 +1,17 @@
 <div class="container">
-  <div class="well clearfix" id="create-post">
-    <div class="form">
-    <%= form_for(:post, url: posts_path) do |f| %>
-      <div class="form-group">
-        <%= f.text_field :content, class: "form-control input-lg",
+  <div class="well" id="create-post">
+    <div id="post_form">
+    <%= form_for(:post, url: posts_path, html: {class: "form", id: "create_post"}, remote: true) do |f| %>
+      <div class="input-group">
+        <%= f.text_field :content, class: "form-control",
                                                     placeholder: "What's on your mind..." %>
-      </div>
-      <div class="form-group">
-        <%= f.submit "Submit", class: "btn btn-default pull-right" %>
+        <div class="input-group-btn">
+            <%= f.submit "Post", class: "btn btn-default pull-right" %>
+          </div>
       </div>
     <% end %>
     </div>
-</div>
+  </div>
 </div>
 
 

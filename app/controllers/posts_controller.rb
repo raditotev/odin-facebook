@@ -5,6 +5,7 @@ class PostsController < ApplicationController
     friends.each do |friend|
       friend.posts.includes(:author, :comments, :likes).each { |post| @posts << post }
     end
+    current_user.posts.includes(:author, :comments, :likes).each { |post| @posts << post }
     @posts.sort_by! {|post| -post.created_at.strftime("%s").to_i }
   end
 
@@ -13,10 +14,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = current_user.posts.build(post_params)
-    if post.save
-      flash[:success] = "Post created!"
-      redirect_to current_user
+    @post = current_user.posts.build(post_params)
+    if @post.save
+      flash.now[:success] = "Post created!"
+      respond_to do |format|
+        format.html {redirect_to current_user}
+        format.js
+      end
     else
       flash[:error] = "There was a problem...Post hasn't been created!"
     end

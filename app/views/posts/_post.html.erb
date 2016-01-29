@@ -1,6 +1,5 @@
-<div class="container">
-  <% @posts.each do |post| %>
-  <div class="panel panel-info">
+<div>
+    <div class="panel panel-info">
     <div class="panel-heading">
       <h3 class="panel-title"><%= post.author.name %> <small class="muted">posted <%= time_ago_in_words(post.created_at) %> ago</small></h3>
     </div>
@@ -53,8 +52,9 @@
       </div>
     </div>
   </div>
-  <% end %>
-  </div>
+</div>
+
+
 
 
 
