@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
 
-  before_save :create_username
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :confirmable, :registerable,
@@ -26,6 +24,11 @@ class User < ActiveRecord::Base
   has_many :likes, dependent: :destroy
 
   has_many :notifications, dependent: :destroy
+
+  before_save :create_username
+
+  validates :name, presence: true, length: {maximum: 50}
+  validates :email, uniqueness: {case_sensitive: false}
 
   def to_param
     username
