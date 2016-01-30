@@ -38,14 +38,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to image_tag('http://i.imgur.com/GaJGtSh.png') %>
+      <%= link_to image_tag('http://i.imgur.com/GaJGtSh.png'), new_user_session_path %>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "navbar-form navbar-right"}) do |f| %>
         <div class="form-group">
           <div>
-            <%= f.label :email, class: "signin_label" %><br />
-            <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+            <div class="clearfix visible-block">
+              <%= f.label :email, class: "signin_label" %>
+            </div>
+            <div class="clearfix visible-block">
+              <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+            </div>
           </div>
             <% if devise_mapping.rememberable? -%>
             <div id="remember-me">
@@ -56,14 +60,17 @@
         </div>
         <div class="form-group">
           <div>
-            <%= f.label :password, class: "signin_label" %><br />
-            <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+            <div class="clearfix visible-block">
+              <%= f.label :password, class: "signin_label" %>
+            </div>
+            <div class="clearfix visible-block">
+                <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+            </div>
+
           </div>
-            <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
             <div id="forgot-password">
               <%= link_to "Forgot your password?", new_password_path(resource_name), class: "signin_text" %>
             </div>
-            <% end -%>
         </div>
         <div class="form-group">
           <%= f.submit "Log in", class: 'btn btn-primary' %>

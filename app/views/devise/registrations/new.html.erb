@@ -1,4 +1,16 @@
-<h2>Sign up</h2>
+<div id="login" class="gradient">
+  <div class="container">
+    <div class="row">
+  <div class="col-md-6">
+    <h4 class="facebook_text_color">
+      Facebook helps you connect and share with the people in your life.
+    </h4>
+    <%= image_tag 'http://i.imgur.com/PYcWcQE.png' %>
+  </div>
+  <div class="col-md-6">
+  <div class="text-center">
+    <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook), class: 'btn btn-primary btn-lg' %>
+  </div>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -26,8 +38,18 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
   </div>
 
-    <%= f.submit "Sign up", class: 'btn btn-primary' %>
+  <div>
+    <%= f.submit "Create an account", class: 'btn btn-success btn-lg' %>
+    <%= link_to "Didn't receive confirmation instructions?", new_user_confirmation_path, class: "pull-right" %>
+  </div>
+
+
 
 <% end %>
 
-<%= render "devise/shared/links" %>
+  </div>
+<div>
+
+  </div>
+</div>
+

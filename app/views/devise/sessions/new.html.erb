@@ -40,7 +40,12 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
   </div>
 
+  <div>
     <%= f.submit "Create an account", class: 'btn btn-success btn-lg' %>
+    <%= link_to "Didn't receive confirmation instructions?", new_user_confirmation_path, class: "pull-right" %>
+  </div>
+
+
 
 <% end %>
 
