@@ -28,7 +28,7 @@
                 commented your post "<%= link_to notification.notifiable.post.content[0..10], post_path(notification.notifiable.post) %>..."
               </p>
             <% elsif notification.notifiable_type == 'Invitation' %>
-              <p><%= link_to notification.notifiable.from_user.name, user_path(notification.notifiable.from_user) %> send you friend's request</p>
+              <p><%= link_to notification.notifiable.from_user.name, user_path(notification.notifiable.from_user) %> send you friend's <%= link_to "request", friends_user_path(current_user) %> </p>
             <% end %>
             </div>
           <% notification.update_attributes(read: true) %>
