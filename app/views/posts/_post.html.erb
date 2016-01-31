@@ -34,8 +34,10 @@
       <% end %>
       </div>
 
+      <hr>
+
       <div id="comments">
-      <%= render post.comments %>
+        <%= render post.comments.order(created_at: :asc) %>
       </div>
 
       <div id="comment_form">
