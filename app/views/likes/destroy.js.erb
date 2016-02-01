@@ -1,0 +1,2 @@
+$('#likes-<%= @post.id %>').html("<%= j render partial: 'likes/like', locals: {post: @post} %>");
+$('#links_like-<%= @post.id %>').html("<%= j render partial: 'likes/links_like', locals: {post: @post} %>");

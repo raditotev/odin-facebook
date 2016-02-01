@@ -1,0 +1,15 @@
+      <% if post.likes.any? %>
+        <% if post.likes.find_by(user: current_user.id) %>
+            <% if post.likes.count == 1 %>
+            You like this post
+            <% elsif post.likes.count > 1 %>
+            You and <%= 'other'.pluralize(post.likes.count - 1) %>  like this post
+            <% end %>
+        <% else %>
+          <% if post.likes.count == 1 %>
+            <%= post.likes.first.user.name %> likes this post
+          <% elsif post.likes.count > 1 %>
+            <%= post.likes.last.user.name %> and <%= 'other'.pluralize(post.likes.count - 1) %> like this post
+          <% end %>
+        <% end %>
+      <% end %>

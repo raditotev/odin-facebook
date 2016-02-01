@@ -2,8 +2,11 @@ class LikesController < ApplicationController
   def create
     like = Like.new(like_params)
     if like.save
-      #success message
-      redirect_to root_url
+      @post = like.post
+      respond_to do |format|
+        format.html {  redirect_to root_url }
+        format.js
+      end
     else
       #error message
       redirect_to root_url
@@ -12,8 +15,12 @@ class LikesController < ApplicationController
 
   def destroy
     like = Like.find_by(post_id: params[:post_id], user_id: params[:user_id])
+    @post = like.post
     like.destroy
-    redirect_to root_url
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.js
+    end
   end
 
   private

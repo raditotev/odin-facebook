@@ -1,0 +1,7 @@
+    <% if post.likes.map{|like| like.user}.include? current_user %>
+        <%= link_to "Unlike", like_path(post_id: post.id, user_id: current_user.id),
+                                            method: 'delete', remote: true %>
+      <% else %>
+          <%= link_to "Like", likes_path(like: {post_id: post.id, user_id: current_user.id}),
+                                            method: 'post', remote: true %>
+      <% end %>
