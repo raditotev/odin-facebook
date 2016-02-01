@@ -7,6 +7,11 @@ class PostsController < ApplicationController
     end
     current_user.posts.includes(:author, :comments, :likes).each { |post| @posts << post }
     @posts.sort_by! {|post| -post.created_at.strftime("%s").to_i }
+    @posts = @posts.paginate(page: params[:page], per_page: 15)
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show

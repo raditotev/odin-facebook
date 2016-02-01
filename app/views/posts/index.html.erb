@@ -1,22 +1,20 @@
-  <div class="container">
-    <div class="jumbotron">
-      <h1>Welcome, <%= current_user.name %>!</h1>
-      <p>Good to have you back.</p>
-    </div>
+<div class="container">
+  <div class="jumbotron">
+    <h1>Welcome, <%= current_user.name %>!</h1>
+    <p>Good to have you back.</p>
   </div>
 
   <h2 class="text-center">Feed</h2>
 
-  <div class="container">
-    <div class="well" id="create-post">
-      <%= render 'shared/create_post' %>
-    </div>
+  <div class="well" id="create-post">
+    <%= render 'shared/create_post' %>
   </div>
 
-
-  <div class="container" id="posts">
+  <div id="posts">
     <%= render @posts %>
   </div>
+</div>
 
-
-
+<div id="infinite-scrolling">
+    <%= will_paginate %>
+  </div>
