@@ -1,11 +1,26 @@
-<div>
+<div id="post-<%= post.id %>">
     <div class="panel panel-info">
     <div class="panel-heading">
-      <h3 class="panel-title"><%= post.author.name %> <small class="muted">posted <%= time_ago_in_words(post.created_at) %> ago</small></h3>
+      <h3 class="panel-title">
+        <%= post.author.name %> <small class="muted">posted <%= time_ago_in_words(post.created_at) %> ago</small>
+        <div class="dropdown pull-right">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#" data-toggle="modal" data-target="#updatePost-<%= post.id %>">Edit</a></li>
+          <li><%= link_to "Delete", post_path(post), method: :delete, remote: true, data: {confirm: "Are you sure?"} %></li>
+        </ul>
+      </div>
+      </h3>
+
     </div>
 
     <div class="panel-body">
       <%= post.content %>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="updatePost-<%= post.id %>" tabindex="-1" role="dialog" aria-labelledby="updatePostLabel">
+        <%= render partial: 'update_post', locals: {post: post} %>
     </div>
 
     <div class="panel-footer">

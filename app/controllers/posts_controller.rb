@@ -26,11 +26,17 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+
   def update
-    post = Post.find(params[:id])
-    if post.update_attributes(post_params)
-      flash[:success] = "Post updated"
-      redirect_to current_user
+    @post = Post.find(params[:id])
+    if @post.update_attributes(post_params)
+      respond_to do |format|
+        format.html { redirect_to current_user }
+        format.js
+      end
     else
       flash[:error] = "Post wasn't updated!"
       redirect_to current_user
@@ -38,9 +44,12 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    post = Post.find(params[:id])
-    post.destroy
-    redirect_to root_url
+    @post = Post.find(params[:id])
+    @post.destroy
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.js
+    end
   end
 
   private
