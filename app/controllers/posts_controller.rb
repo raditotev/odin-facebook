@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   def index
     @posts = []
     friends = current_user.friends.includes(:comments, :likes)
@@ -61,5 +63,10 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:content)
+  end
+
+  def correct_user
+    user =Post.find(params[:id]).author
+    flash.now[:error] = "You are not authorized" unless user == current_user
   end
 end

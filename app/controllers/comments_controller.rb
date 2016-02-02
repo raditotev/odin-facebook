@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
   def new
     @post = Post.find(params[:post_id])
     @comment = Comment.new
@@ -47,5 +49,10 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:post_id, :content, :user_id)
+  end
+
+  def correct_user
+    @user = Comment.find(params[:id]).user
+     flash.now[:error] = "You are not authorized" unless @user == current_user
   end
 end

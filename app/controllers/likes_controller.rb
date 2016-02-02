@@ -1,4 +1,6 @@
 class LikesController < ApplicationController
+  before_action :correct_user, only: [:destroy]
+
   def create
     like = Like.new(like_params)
     if like.save
@@ -27,5 +29,10 @@ class LikesController < ApplicationController
 
   def like_params
     params.require(:like).permit(:user_id, :post_id)
+  end
+
+  def correct_user
+    user = Like.find_by(post_id: params[:post_id], user_id: params[:user_id]).user
+    flash.now[:error] = "You are not authorized" unless user == current_user
   end
 end

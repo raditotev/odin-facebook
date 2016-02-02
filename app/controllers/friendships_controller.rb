@@ -1,4 +1,5 @@
 class FriendshipsController < ApplicationController
+  before_action :correct_user, only: [:destroy]
 
   def destroy
     friendship = Friendship.find_by(user: current_user.id, friend: params[:id])
@@ -15,6 +16,11 @@ class FriendshipsController < ApplicationController
 
   def friendship_params
     params.require(:friendship).permit(:user_id, :friend_id)
+  end
+
+  def correct_user
+    user = Friendship.find_by(user: current_user, friend: params[:id]).user
+    flash.now[:error] = "You are not authorized" unless user == current_user
   end
 
 end

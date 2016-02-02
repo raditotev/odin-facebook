@@ -13,7 +13,7 @@ class UsersController < ApplicationController
         @users << user
       end
     end
-    @users
+    @users = @users.paginate(page: params[:page], per_page: 15)
   end
 
   def show
@@ -21,6 +21,7 @@ class UsersController < ApplicationController
       @post = Post.find(params[:id])
     end
     @posts = @user.posts.order(id: :desc).includes(:author, :comments, :likes)
+    @posts = @posts.paginate(page: params[:page], per_page: 15)
   end
 
   def profile
