@@ -52,7 +52,13 @@ class CommentsController < ApplicationController
   end
 
   def correct_user
-    @user = Comment.find(params[:id]).user
-     flash.now[:error] = "You are not authorized" unless @user == current_user
+    user = Comment.find(params[:id]).user
+    unless user == current_user
+      flash[:danger] = "You are not authorized"
+      respond_to do |format|
+        format.html {redirect_to root_url}
+        format.js {render text: "alert('You are not authorized!')"}
+      end
+    end
   end
 end

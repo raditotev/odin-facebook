@@ -33,6 +33,9 @@ class LikesController < ApplicationController
 
   def correct_user
     user = Like.find_by(post_id: params[:post_id], user_id: params[:user_id]).user
-    flash.now[:error] = "You are not authorized" unless user == current_user
+    unless user == current_user
+      flash[:danger] = "You are not authorized!"
+      redirect_to root_url
+    end
   end
 end

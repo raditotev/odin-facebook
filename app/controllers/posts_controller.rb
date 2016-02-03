@@ -67,6 +67,12 @@ class PostsController < ApplicationController
 
   def correct_user
     user =Post.find(params[:id]).author
-    flash.now[:error] = "You are not authorized" unless user == current_user
+    unless user == current_user
+      flash[:danger] = "You are not authorized!"
+      respond_to do |format|
+        format.html {redirect_to root_url}
+        format.js {render text: "alert('You are not authorized!')"}
+      end
+    end
   end
 end

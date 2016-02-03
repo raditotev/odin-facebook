@@ -1,5 +1,5 @@
 class InfosController < ApplicationController
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update]
 
 def new
   @info = Info.new
@@ -44,8 +44,11 @@ end
   end
 
   def correct_user
-    @user = Info.find(params[:id]).user
-     flash.now[:error] = "You are not authorized" unless @user == current_user
+    user = Info.find(params[:id]).user
+    unless user == current_user
+      flash[:danger] = "You are not authorized"
+      redirect_to root_url
+     end
   end
 
 end
